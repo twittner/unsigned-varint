@@ -133,15 +133,15 @@ pub fn usize_buffer() -> [u8; USIZE_LEN] {
 
 // Required lengths of encoding buffers:
 
-const U8_LEN: usize = 2;
-const U16_LEN: usize = 3;
-const U32_LEN: usize = 5;
-const U64_LEN: usize = 10;
-const U128_LEN: usize = 19;
+pub(crate) const U8_LEN: usize = 2;
+pub(crate) const U16_LEN: usize = 3;
+pub(crate) const U32_LEN: usize = 5;
+pub(crate) const U64_LEN: usize = 10;
+pub(crate) const U128_LEN: usize = 19;
 
 #[cfg(target_pointer_width = "64")]
-const USIZE_LEN: usize = U64_LEN;
+pub(crate) const USIZE_LEN: usize = U64_LEN;
 
 #[cfg(target_pointer_width = "32")]
-const USIZE_LEN: usize = U32_LEN;
+pub(crate) const USIZE_LEN: usize = U32_LEN;
 

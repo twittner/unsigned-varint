@@ -25,3 +25,5 @@ pub mod decode;
 pub mod encode;
 #[cfg(feature = "codec")]
 pub mod codec;
+#[cfg(feature = "io")]
+pub mod io;

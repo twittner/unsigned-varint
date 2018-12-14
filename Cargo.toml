@@ -10,10 +10,14 @@ edition = "2018"
 
 [features]
 codec = ["bytes", "tokio-codec"]
+io = ["futures", "smallvec", "tokio-io"]
 
 [dependencies]
 bytes = { version = "0.4", optional = true }
+futures = { version = "0.1", optional = true }
+smallvec = { version = "0.6", optional = true }
 tokio-codec = { version = "0.1", optional = true }
+tokio-io = { version = "0.1", optional = true }
 
 [dev-dependencies]
 bytes = "0.4"
