@@ -23,23 +23,35 @@ use smallvec::SmallVec;
 use std::{io, usize};
 use tokio_io::AsyncWrite;
 
+/// Length-prefixed writer over `std::io::Write`.
 #[derive(Debug)]
 pub struct UviWriter<T> {
+    // the I/O resource
     io: T,
+    // the unsigned-varint encoded length
     buf: [u8; encode::USIZE_LEN],
+    // index into buf, pfx, sfx, or data depending on state
     idx: usize,
+    // valid length of buf, or data depending on state
     len: usize,
+    // an optional constant prefix to write before each item
     pfx: SmallVec<[u8; 8]>,
+    // an optional constant suffix to write after each item
     sfx: SmallVec<[u8; 8]>,
     state: State
 }
 
 #[derive(Debug)]
 enum State {
+    /// initial state
     Init,
+    /// currently writing the length
     WriteLen,
+    /// currently writing the prefix
     WritePrefix,
+    /// currently writing the actual data
     WriteData,
+    /// currently wriging the suffix
     WriteSuffix(usize)
 }
 
